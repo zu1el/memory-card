@@ -1,6 +1,7 @@
 import random
 import json
 from PyQt5.QtWidgets import *
+import ww
 
 app = QApplication([])
 db = json.load(open('db.json', encoding='utf-8'))
@@ -9,6 +10,7 @@ window = QWidget()
 window.resize(700, 500)
 
 menu_button = QPushButton("Меню")
+edit_button = QPushButton("редагувати")
 pause_btn = QPushButton("Відпочити")
 spin_box = QSpinBox()
 min = QLabel("Хвилин")
@@ -27,6 +29,7 @@ random.shuffle(answers)
 main_line = QVBoxLayout()
 firs_H_Line = QHBoxLayout()
 firs_H_Line.addWidget(menu_button)
+firs_H_Line.addWidget(edit_button)
 firs_H_Line.addStretch()
 firs_H_Line.addWidget(pause_btn)
 firs_H_Line.addWidget(spin_box)
@@ -75,9 +78,22 @@ def next_question_func():
     for i in range(len(answers)):
         answers[i].show()
 
+def show_dialog():
+    window.hide()
+    ww.menu_window()
+    window.show()
+
+def show_edit_dialog():
+    window.hide()
+    ww.edit_window()
+    window.show()
+    set_question()
+
 set_question()
 vidpovistu.clicked.connect(answerClick)
-next_question_func.clicked.connect(next_question_func)
+next_quesion.clicked.connect(next_question_func)
+menu_button.clicked.connect(show_dialog)
+edit_button.clicked.connect(show_edit_dialog)
 
 window.show()
 app.exec()
