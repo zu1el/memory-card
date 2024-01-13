@@ -87,6 +87,7 @@ def show_edit_dialog():
     window.hide()
     ww.edit_window()
     window.show()
+    print(db)
     set_question()
 
 set_question()

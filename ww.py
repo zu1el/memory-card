@@ -93,11 +93,12 @@ def edit_window():
             "Неправильна 2": false_answer2_.text(),
             "Неправильна 3": false_answer3_.text()
         }
+        print(question)
         db["questions"][db["cur questoin"]] = question
         with open("db.json", "w", encoding="utf-8") as file:
             json.dump(db, file, ensure_ascii=False)
 
-
+    edit_quest.clicked.connect(db_update)
     window.setLayout(main_line)
     window.exec()
-    edit_quest.clicked.connect(db_update)
+
